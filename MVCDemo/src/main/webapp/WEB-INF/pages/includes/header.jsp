@@ -41,6 +41,7 @@
                   <li><a href="data/json">Json servlet</a></li>
                   <li><a href="data/graph">Graph servlet</a></li>
                   <li><a href="pages/ajax">AJAX page</a></li>
+                  <li><a href="pages/concurrency">Concurrency</a></li>
                   <!--
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
