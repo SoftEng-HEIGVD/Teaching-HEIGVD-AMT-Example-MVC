@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="${pageContext.request.contextPath}/">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>AMT Demo App</title>
+    <title>${pageTitle}</title>
 
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <script src="static/js/jquery.min.js"></script>
@@ -34,16 +34,18 @@
             <ul class="nav navbar-nav">
               <li><a href="pages/about">About</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Examples <span class="caret"></span></a>
+                <a id="menuExamples" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Examples <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="pages/beers">Beers</a></li>
-                  <li><a href="pages/ugly">Ugly servlet</a></li>
-                  <li><a href="data/json">Json servlet</a></li>
-                  <li><a href="data/graph">Graph servlet</a></li>
-                  <li><a href="pages/ajax">AJAX page</a></li>
-                  <li><a href="pages/concurrency">Concurrency</a></li>
-                  <!--
+                  <li><a id="menuItemBeers" href="pages/beers">Beers</a></li>
+                  <li><a id="menuItemUglyServlet" href="pages/ugly">Ugly servlet</a></li>
+                  <li><a id="menuItemJsonServlet" href="data/json">Json servlet</a></li>
+                  <li><a id="menuItemGraphServlet" href="data/graph">Graph servlet</a></li>
+                  <li><a id="menuItemAJAXPage" href="pages/ajax">AJAX page</a></li>
+                  <li><a id="menuItemConcurrency" href="pages/concurrency">Concurrency</a></li>
                   <li role="separator" class="divider"></li>
+                  <li><a id="menuItemGenerateTestData" href="generateTestData">Generate test data</a></li>
+                  <li><a id="menuItemShowCorporateInformation" href="pages/corporateInformation">Show corporate information</a></li>
+                  <!--
                   <li class="dropdown-header">Nav header</li>
                   -->
                 </ul>

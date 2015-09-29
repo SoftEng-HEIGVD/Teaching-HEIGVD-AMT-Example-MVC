@@ -66,7 +66,7 @@ public class AuthenticationServlet extends HttpServlet {
      If the user accessed /auth directly and there is no targetUrl, then we send him
      to the home page.
      */
-    String targetUrl = (String) request.getAttribute("targetUrl");
+    String targetUrl = request.getParameter("targetUrl");
     if (targetUrl == null) {
       targetUrl = "/pages/home";
     }

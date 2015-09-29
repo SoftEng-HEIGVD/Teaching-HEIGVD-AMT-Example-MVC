@@ -36,6 +36,7 @@ public class HomeServlet extends HttpServlet {
      
      * see https://docs.oracle.com/javaee/6/tutorial/doc/bnahu.html#bnahw
     */
+    request.setAttribute("pageTitle", "Welcome");
     request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
   }
 

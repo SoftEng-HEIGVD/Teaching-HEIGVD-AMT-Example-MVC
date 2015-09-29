@@ -30,6 +30,7 @@ public class AjaxPageServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+    request.setAttribute("pageTitle", "AJAX Example");
     request.getRequestDispatcher("/WEB-INF/pages/ajax.jsp").forward(request, response);
   }
 

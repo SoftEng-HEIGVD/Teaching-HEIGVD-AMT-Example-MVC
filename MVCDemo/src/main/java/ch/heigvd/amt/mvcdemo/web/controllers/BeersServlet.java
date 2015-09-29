@@ -68,6 +68,7 @@ public class BeersServlet extends HttpServlet {
      able to retrive it by using the "beers" name in an EL expression.
      */
     request.setAttribute("beers", model);
+    request.setAttribute("pageTitle", "Beers List");
 
     /*
      The following code would place the model in the session. The good thing is
