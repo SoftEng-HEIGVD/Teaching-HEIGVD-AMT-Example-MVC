@@ -2,10 +2,11 @@ package ch.heigvd.amt.mvcdemo.web.controllers;
 
 import ch.heigvd.amt.mvcdemo.model.entities.Company;
 import ch.heigvd.amt.mvcdemo.model.entities.Employee;
+import ch.heigvd.amt.mvcdemo.services.dao.BusinessDomainEntityNotFoundException;
 import ch.heigvd.amt.mvcdemo.services.dao.CompaniesDAOLocal;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -37,7 +38,14 @@ public class CompanyDetailsServlet extends HttpServlet {
     throws ServletException, IOException {
     long companyId = Long.parseLong(request.getParameter("id"));
 
-    Company company = companiesDAO.findById(companyId);
+    Company company = null;
+    try {
+      company = companiesDAO.findById(companyId);
+    } catch (BusinessDomainEntityNotFoundException ex) {
+      response.sendError(HttpServletResponse.SC_NOT_FOUND);
+      return;
+      //throw new ServletException(ex);
+    }
     request.setAttribute("company", company);
 
     int pageSize = 0;

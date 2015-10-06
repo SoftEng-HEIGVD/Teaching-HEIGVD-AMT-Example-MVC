@@ -2,6 +2,7 @@ package ch.heigvd.amt.mvcdemo.services.dao;
 
 import ch.heigvd.amt.mvcdemo.model.entities.Company;
 import ch.heigvd.amt.mvcdemo.model.entities.Employee;
+import ch.heigvd.amt.mvcdemo.model.entities.SalaryStatistics;
 import ch.heigvd.amt.mvcdemo.model.entities.Sector;
 import java.util.List;
 import javax.ejb.EJB;
@@ -48,14 +49,15 @@ public class CompaniesDAO extends GenericDAO<Company, Long> implements Companies
   }
 
   /**
-   * This is another example, of a method that shows how JPA code can be dangerous
-   * if it is not well understood. For this to work, the arguments company and
-   * employee MUST be managed entities. The code will work if the method is called
-   * from a SLSB and if a persist, a merge or a find has been done on these entities.
-   * If the method is called from a servlet, no exception will be thrown (the java
-   * code is valid), BUT no change will be propagated to the DB!! (for JPA, they
-   * do not exist in the persistence context). In the method, we could have used the
-   * merge() method to bring the arguments in the persistence context.
+   * This is another example, of a method that shows how JPA code can be
+   * dangerous if it is not well understood. For this to work, the arguments
+   * company and employee MUST be managed entities. The code will work if the
+   * method is called from a SLSB and if a persist, a merge or a find has been
+   * done on these entities. If the method is called from a servlet, no
+   * exception will be thrown (the java code is valid), BUT no change will be
+   * propagated to the DB!! (for JPA, they do not exist in the persistence
+   * context). In the method, we could have used the merge() method to bring the
+   * arguments in the persistence context.
    *
    * @param company
    * @param employee
@@ -83,10 +85,37 @@ public class CompaniesDAO extends GenericDAO<Company, Long> implements Companies
     result = em.createNamedQuery("Company.findEmployeesPageForCompanyId").setParameter("id", companyId).setMaxResults(pageSize).setFirstResult(pageIndex * pageSize).getResultList();
     return result;
   }
+  
+  @Override
+  public List<Employee> findAllEmployeesForCompanyId(long companyId) {
+    List<Employee> result;
+    result = em.createNamedQuery("Company.findAllEmployeesForCompanyId").setParameter("id", companyId).getResultList();
+    return result;
+  }  
 
   @Override
   public long countEmployees(long companyId) {
     return (long) em.createNamedQuery("Company.countEmployeesForCompanyId").setParameter("id", companyId).getSingleResult();
   }
+
+  @Override
+  public List<Employee> findEmployeesByTitle(long companyId, String title) {
+    List<Employee> result;
+    result = em.createNamedQuery("Company.findEmployeesByTitle")
+      .setParameter("id", companyId)
+      .setParameter("title", title)
+      .getResultList();
+    return result;
+  }
+
+  @Override
+  public SalaryStatistics getSalaryStatistics(long companyId) {
+    Object[] queryResult = (Object[])em.createNamedQuery("Company.computeSalaryStatistics").setParameter("id", companyId).getSingleResult();
+    SalaryStatistics result = new SalaryStatistics();
+    result.setHighestSalary((double)queryResult[0]);
+    result.setAverageSalary((double)queryResult[1]);
+    return result;
+  }
+
 
 }

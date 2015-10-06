@@ -36,12 +36,16 @@ public class GenericDAO<T extends AbstractDomainModelEntity<PK>, PK> implements 
   }
 
   @Override
-  public void update(T t) {
+  public void update(T t) throws BusinessDomainEntityNotFoundException {
+    findById(t.getId());
     em.merge(t);
   }
 
   @Override
-  public void delete(T t) {
+  public void delete(T t) throws BusinessDomainEntityNotFoundException {
+    if (!em.contains(t)) {
+      t = findById(t.getId());
+    }
     em.remove(t);
   }
 
@@ -51,8 +55,12 @@ public class GenericDAO<T extends AbstractDomainModelEntity<PK>, PK> implements 
   }
 
   @Override
-  public T findById(PK id) {
-    return em.find(jpaEntityClass, id);
+  public T findById(PK id) throws BusinessDomainEntityNotFoundException {
+    T result = em.find(jpaEntityClass, id);
+    if (result == null) {
+      throw new BusinessDomainEntityNotFoundException("Entity with id " + id + " not found");
+    }
+      return em.find(jpaEntityClass, id);
   }
 
   @Override

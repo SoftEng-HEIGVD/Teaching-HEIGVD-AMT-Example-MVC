@@ -1,6 +1,6 @@
-package ch.heigvd.amt.mvcdemo.services;
+package ch.heigvd.amt.mvcdemo.services.legacy;
 
-import ch.heigvd.amt.mvcdemo.model.Beer;
+import ch.heigvd.amt.mvcdemo.model.legacy.Beer;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

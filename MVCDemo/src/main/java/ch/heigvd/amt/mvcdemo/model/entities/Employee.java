@@ -1,9 +1,6 @@
 package ch.heigvd.amt.mvcdemo.model.entities;
 
-import java.util.LinkedList;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**

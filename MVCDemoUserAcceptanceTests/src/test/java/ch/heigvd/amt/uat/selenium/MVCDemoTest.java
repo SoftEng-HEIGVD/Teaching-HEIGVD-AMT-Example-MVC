@@ -3,6 +3,7 @@ package ch.heigvd.amt.uat.selenium;
 import ch.heigvd.amt.uat.selenium.pages.AboutPage;
 import ch.heigvd.amt.uat.selenium.pages.HomePage;
 import ch.heigvd.amt.uat.selenium.pages.LoginPage;
+import io.probedock.client.annotations.ProbeTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class MVCDemoTest {
   }
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void itShouldNotBePossibleToSigninWithAnInvalidEmail() {
     driver.get(baseUrl);
     LoginPage loginPage = new LoginPage(driver);
@@ -35,6 +37,7 @@ public class MVCDemoTest {
   }
   
   @Test
+  @ProbeTest(tags = "WebUI")
   public void successfulSigninShouldBringUserToHomePage() {
     driver.get(baseUrl);
     LoginPage loginPage = new LoginPage(driver);
@@ -44,6 +47,7 @@ public class MVCDemoTest {
   }
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void aUserTryingToGetToAboutPageShouldBeRedirectedThereAfterSignin() {
     driver.get(baseUrl + "/pages/about");
     LoginPage loginPage = new LoginPage(driver);
@@ -53,6 +57,7 @@ public class MVCDemoTest {
   }
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void aUserShouldBeAbleToVisitAllPagesAfterSignin() {
     driver.get(baseUrl);
     LoginPage loginPage = new LoginPage(driver);
@@ -67,6 +72,7 @@ public class MVCDemoTest {
   }
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void aUserShouldBeAbleToGetDetailsInformationAboutACompany() {
     driver.get(baseUrl);
     LoginPage loginPage = new LoginPage(driver);
@@ -76,9 +82,7 @@ public class MVCDemoTest {
     homePage.goToCorporateInformationPageViaMenu()
       .clickOnFirstCompanyLinkInCompaniesTable();
   }
-
   
-
   @After
   public void closeBrowser() {
     driver.close();

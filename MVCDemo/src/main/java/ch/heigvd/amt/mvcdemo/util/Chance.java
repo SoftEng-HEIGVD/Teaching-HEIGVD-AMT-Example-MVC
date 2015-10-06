@@ -37,5 +37,15 @@ public class Chance {
   public static String pickRandom(String[] elements) {
     return elements[(int)(Math.random() * elements.length)];
   }
+  
+  /**
+   * Returns a number value between min and max
+   * @param min the min value
+   * @param max the max value
+   * @return a random value between min and max
+   */
+  public static double randomDouble(double min, double max) {
+    return (long)(Math.random() * (max - min)) + min;
+  }
 
 }

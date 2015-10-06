@@ -5,6 +5,7 @@ import ch.heigvd.amt.uat.fluentlenium.pages.CompanyDetailsFluentPage;
 import ch.heigvd.amt.uat.fluentlenium.pages.CorporateInformationFluentPage;
 import ch.heigvd.amt.uat.fluentlenium.pages.HomeFluentPage;
 import ch.heigvd.amt.uat.fluentlenium.pages.LoginFluentPage;
+import io.probedock.client.annotations.ProbeTest;
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -36,15 +37,18 @@ public class MVCDemoFluentTest extends FluentTest {
 
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void itShouldNotBePossibleToSigninWithAnInvalidEmail() {
     goTo(baseUrl);
     loginPage.isAt();
     loginPage.typeEmailAddress("not a valid email");
     loginPage.typePassword("any password");
     loginPage.clickSignin();
+    loginPage.isAt();
   }
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void successfulSigninShouldBringUserToHomePage() {
     goTo(baseUrl);
     loginPage.isAt();
@@ -55,6 +59,7 @@ public class MVCDemoFluentTest extends FluentTest {
   }
 
   @Test
+  @ProbeTest(tags = "WebUI")
   public void itShouldBePossibleToGetDetailsForACompanyAfterSignin() {
     goTo(corporateInformationPage);
     loginPage.isAt(); // we have not logged in, so we should be redirected

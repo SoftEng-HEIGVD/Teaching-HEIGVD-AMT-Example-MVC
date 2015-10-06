@@ -33,7 +33,10 @@ import javax.persistence.OneToMany;
 @NamedQueries({
   @NamedQuery(name = "Company.findByName", query = "SELECT c FROM Company c WHERE c.name = :name"),
   @NamedQuery(name = "Company.findEmployeesPageForCompanyId", query = "SELECT e FROM Employee e WHERE e.company.id = :id"),
-  @NamedQuery(name = "Company.countEmployeesForCompanyId", query = "Select count(e) FROM Employee e WHERE e.company.id = :id")
+  @NamedQuery(name = "Company.findAllEmployeesForCompanyId", query = "SELECT e FROM Employee e WHERE e.company.id = :id"),
+  @NamedQuery(name = "Company.countEmployeesForCompanyId", query = "SELECT count(e) FROM Employee e WHERE e.company.id = :id"),
+  @NamedQuery(name = "Company.computeSalaryStatistics", query = "SELECT coalesce(MAX(e.basicSalary), 0), coalesce(AVG(e.basicSalary), 0) FROM Employee e WHERE e.company.id = :id"),
+  @NamedQuery(name = "Company.findEmployeesByTitle", query = "SELECT e FROM Employee e WHERE e.company.id = :id AND e.title = :title")
 })
 
 public class Company extends AbstractDomainModelEntity<Long> {

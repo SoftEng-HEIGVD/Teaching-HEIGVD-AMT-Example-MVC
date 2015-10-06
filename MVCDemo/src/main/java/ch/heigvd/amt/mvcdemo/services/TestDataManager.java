@@ -87,8 +87,8 @@ public class TestDataManager implements TestDataManagerLocal {
       Logger.getLogger(TestDataManager.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    Employee ceo = employeesDAO.createAndReturnManagedEntity(new Employee("John", "Smith", "CEO", 1.0, 5000000.0));
-    Employee cfo = employeesDAO.createAndReturnManagedEntity(new Employee("Barbara", "Jones", "CFO", 200000.0, 1000000.0));
+    Employee ceo = employeesDAO.createAndReturnManagedEntity(new Employee("Tim", "Cook", "CEO", 1.0, 5000000.0));
+    Employee cfo = employeesDAO.createAndReturnManagedEntity(new Employee("Luca", "Maestri", "CFO", 200000.0, 1000000.0));
     Employee coo = employeesDAO.createAndReturnManagedEntity(new Employee("Evan", "Peterson", "COO", 200000.0, 1000000.0));
     Employee sse1 = employeesDAO.createAndReturnManagedEntity(new Employee("Helen", "Dupont", "Senior Software engineer", 150000.0, 20000.0));
     Employee se1 = employeesDAO.createAndReturnManagedEntity(new Employee("Jamie", "Jones", "Software engineer", 100000.0, 5000.0));
@@ -113,12 +113,12 @@ public class TestDataManager implements TestDataManagerLocal {
     Department it = departmentsDAO.createAndReturnManagedEntity(new Department(apple, "IT", coo));
     Department hr = departmentsDAO.createAndReturnManagedEntity(new Department(apple, "HR", coo));
 
-    for (int i = 0; i < 300; i++) {
+    for (int i = 0; i < 38; i++) {
       Employee e = employeesDAO.createAndReturnManagedEntity(new Employee(Chance.randomFirstName(), Chance.randomLastName(), "Staff member", 40000 + Math.random() * 100000, Math.random() * 100000));
       companiesDAO.hire(apple, e);
       it.addMember(e);
     }
-    for (int i = 0; i < 400; i++) {
+    for (int i = 0; i < 43; i++) {
       Employee e = employeesDAO.createAndReturnManagedEntity(new Employee(Chance.randomFirstName(), Chance.randomLastName(), "Staff member", 40000 + Math.random() * 100000, Math.random() * 100000));
       companiesDAO.hire(apple, e);
       engineering.addMember(e);

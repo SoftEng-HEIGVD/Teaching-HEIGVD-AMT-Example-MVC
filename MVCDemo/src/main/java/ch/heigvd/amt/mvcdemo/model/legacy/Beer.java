@@ -1,4 +1,6 @@
-package ch.heigvd.amt.mvcdemo.model;
+package ch.heigvd.amt.mvcdemo.model.legacy;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * This is a model class. Something that is often called a Plain Old Java Object
@@ -17,6 +19,7 @@ package ch.heigvd.amt.mvcdemo.model;
  * 
  * @author Olivier Liechti
  */
+@XmlRootElement
 public class Beer {
   
   private final String name;
