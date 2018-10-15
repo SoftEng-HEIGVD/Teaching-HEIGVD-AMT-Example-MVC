@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSessionListener;
 @WebListener
 public class MonitoringListener implements ServletContextListener, HttpSessionListener, ServletRequestListener {
 
-  TestDataManagerLocal testDataManager = lookupTestDataManagerLocal();
+  TestDataManagerLocal testDataManager; // = lookupTestDataManagerLocal();
 
   private final AtomicLong numberOfSessionsCreated = new AtomicLong(0);
   private final AtomicLong numberOfSessionsDestroyed = new AtomicLong(0);
@@ -40,6 +40,7 @@ public class MonitoringListener implements ServletContextListener, HttpSessionLi
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
+    testDataManager = lookupTestDataManagerLocal();
     testDataManager.generateTestData();
     sce.getServletContext().setAttribute(STARTUP_TIME, System.currentTimeMillis());
     sce.getServletContext().setAttribute(MONITORING_LISTENER, this);
@@ -89,15 +90,19 @@ public class MonitoringListener implements ServletContextListener, HttpSessionLi
 
   private TestDataManagerLocal lookupTestDataManagerLocal() {
     try {
+
       Context c = new InitialContext();
       //String lookupValue ="java:module/TestDataManagerLocal";
       //String lookupValue = "java:global/MVCDemo/TestDataManager!ch.heigvd.amt.mvcdemo.services.TestDataManagerLocal";
-      String lookupValue = "java:global/MVCDemo/TestDataManager";
+      //String lookupValue = "java:global/MVCDemo/TestDataManager";
+      // this works String lookupValue = "java:global/MVCDemo-1.0-SNAPSHOT/TestDataManager";
+      String lookupValue = "java:module/TestDataManager";
 
       return (TestDataManagerLocal) c.lookup(lookupValue);
     } catch (NamingException ne) {
       Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
       throw new RuntimeException(ne);
+      //return null;
     }
   }
 
