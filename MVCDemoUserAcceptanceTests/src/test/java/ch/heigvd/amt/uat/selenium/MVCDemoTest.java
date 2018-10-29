@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -16,14 +17,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  */
 public class MVCDemoTest {
 
-  private String baseUrl = "localhost:8080/MVCDemo/";
+  private String baseUrl = "http://localhost:8080/MVCDemo-1.0-SNAPSHOT";
   private WebDriver driver;
 
   @Before
   public void openBrowser() {
-    driver = new FirefoxDriver();
-    //System.setProperty("webdriver.chrome.driver", "/Users/admin/Downloads/chromedriver");
-    //driver = new ChromeDriver();
+    //driver = new FirefoxDriver();
+    System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver");
+    driver = new ChromeDriver();
   }
 
   @Test

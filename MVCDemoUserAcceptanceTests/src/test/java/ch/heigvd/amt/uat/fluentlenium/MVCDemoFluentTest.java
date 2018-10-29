@@ -9,6 +9,7 @@ import io.probedock.client.annotations.ProbeTest;
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.fluentlenium.core.annotation.Page;
 
@@ -18,7 +19,7 @@ import org.fluentlenium.core.annotation.Page;
  */
 public class MVCDemoFluentTest extends FluentTest {
 
-  private final String baseUrl = "http://localhost:8080/MVCDemo/";
+  private final String baseUrl = "http://localhost:8080/MVCDemo-1.0-SNAPSHOT";
 
   @Page
   public LoginFluentPage loginPage;
@@ -74,9 +75,9 @@ public class MVCDemoFluentTest extends FluentTest {
   
   @Override
   public WebDriver getDefaultDriver() {
-    return new FirefoxDriver();
-    //System.setProperty("webdriver.chrome.driver", "/Users/admin/Downloads/chromedriver");
-    //return new ChromeDriver();
+    //return new FirefoxDriver();
+    System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver");
+    return new ChromeDriver();
   }
 
   @Override

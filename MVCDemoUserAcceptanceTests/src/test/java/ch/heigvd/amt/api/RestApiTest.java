@@ -45,6 +45,8 @@ import org.junit.Before;
  */
 public class RestApiTest {
 
+  public static final String MVCDEMO_API = "http://localhost:8080/MVCDemo-1.0-SNAPSHOT/api";
+
   Client client;
 
   ObjectMapper mapper;
@@ -70,7 +72,7 @@ public class RestApiTest {
     /**
      * Send the POST request with the JSON payload to create a new Sector
      */
-    WebTarget target = client.target("http://localhost:8080/MVCDemo/api").path("sectors").path(Long.toString(randomSectorId));
+    WebTarget target = client.target(MVCDEMO_API).path("sectors").path(Long.toString(randomSectorId));
     Response response = target.request().get();
 
     assertThat(response.getStatus()).isEqualTo(Response.Status.NOT_FOUND.getStatusCode());
@@ -89,7 +91,7 @@ public class RestApiTest {
     /**
      * Send the POST request with the JSON payload to create a new Sector
      */
-    WebTarget target = client.target("http://localhost:8080/MVCDemo/api").path("sectors");
+    WebTarget target = client.target(MVCDEMO_API).path("sectors");
     Response response = target.request().post(Entity.entity(sectorNode, "application/json"));
 
     /**
@@ -124,7 +126,7 @@ public class RestApiTest {
     /**
      * Send a first POST request with the JSON payload to create a new Sector
      */
-    WebTarget target = client.target("http://localhost:8080/MVCDemo/api").path("sectors");
+    WebTarget target = client.target(MVCDEMO_API).path("sectors");
     Response response = target.request().post(Entity.entity(sectorNode, "application/json"));
 
     /**
@@ -139,7 +141,7 @@ public class RestApiTest {
      * Send a second POST request with the same JSON payload to create a new
      * Sector
      */
-    target = client.target("http://localhost:8080/MVCDemo/api").path("sectors");
+    target = client.target(MVCDEMO_API).path("sectors");
     response = target.request().post(Entity.entity(sectorNode, "application/json"));
 
     /**
@@ -173,7 +175,7 @@ public class RestApiTest {
      * Send the POST request with the JSON payload to create a new Company (this
      * will also create two sectors).
      */
-    WebTarget target = client.target("http://localhost:8080/MVCDemo/api").path("companies");
+    WebTarget target = client.target(MVCDEMO_API).path("companies");
     Response response = target.request().post(Entity.entity(companyNode, "application/json"));
 
     /**
@@ -207,7 +209,7 @@ public class RestApiTest {
   @Test
   @ProbeTest(tags = "REST")
   public void itShouldBePossibleToListCompanies() throws IOException {
-    WebTarget target = client.target("http://localhost:8080/MVCDemo/api").path("companies");
+    WebTarget target = client.target(MVCDEMO_API).path("companies");
     Response response = target.request().get();
     assertThat(response.getStatus()).isEqualTo(Response.Status.OK.getStatusCode());
 
@@ -237,7 +239,7 @@ public class RestApiTest {
     String companyName = getRandomUniqueName("Company");
     String[] sectors = new String[0];
     JsonNode companyNode = buildCompanyNode(companyName, sectors);
-    WebTarget target = client.target("http://localhost:8080/MVCDemo/api").path("companies");
+    WebTarget target = client.target(MVCDEMO_API).path("companies");
     Response response = target.request().post(Entity.entity(companyNode, "application/json"));
     assertThat(response.getStatus()).isEqualTo(Response.Status.CREATED.getStatusCode());
     String companyUri = response.getHeaderString("Location");
